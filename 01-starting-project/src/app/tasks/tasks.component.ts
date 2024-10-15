@@ -4,6 +4,8 @@ import { NewTaskComponent } from './new-task/new-task.component';
 
 import { type NewTaskData } from './task/task.model';
 
+import { TasksService } from './tasks.service';
+
 @Component({
   selector: 'app-tasks',
   standalone: true,
@@ -14,16 +16,15 @@ import { type NewTaskData } from './task/task.model';
 export class TasksComponent {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) username!: string;
-  tasks = dummyTasks;
   isAddingTask = false;
 
+  constructor(private tasksService: TasksService) {}
+
   get selectedUserTasks() {
-    return this.tasks.filter((task) => task.userId === this.userId);
+    return this.tasksService.getUsertasks(this.userId);
   }
 
-  onCompleteTask(id: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
-  }
+  onCompleteTask(id: string) {}
 
   onStartAddTask() {
     this.isAddingTask = true;
@@ -34,39 +35,6 @@ export class TasksComponent {
   }
 
   onAddTask(taskData: NewTaskData) {
-    this.tasks.unshift({
-      id: new Date().getTime().toString(),
-      userId: this.userId,
-      title: taskData.title,
-      summary: taskData.summary,
-      dueDate: taskData.date
-    });
     this.isAddingTask = false;
   }
 }
-
-const dummyTasks = [
-  {
-    id: 't1',
-    userId: 'u1',
-    title: 'Master Angular',
-    summary:
-      'Learn all the basic and advanced features of Angular & how to apply them.',
-    dueDate: '2025-12-31',
-  },
-  {
-    id: 't2',
-    userId: 'u3',
-    title: 'Build first prototype',
-    summary: 'Build a first prototype of the online shop website',
-    dueDate: '2024-05-31',
-  },
-  {
-    id: 't3',
-    userId: 'u3',
-    title: 'Prepare issue template',
-    summary:
-      'Prepare and describe an issue template which will help with project management',
-    dueDate: '2024-06-15',
-  },
-];
