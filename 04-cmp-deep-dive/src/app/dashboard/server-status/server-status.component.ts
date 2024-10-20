@@ -5,12 +5,14 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './server-status.component.html',
-  styleUrl: './server-status.component.css'
+  styleUrl: './server-status.component.css',
 })
 export class ServerStatusComponent {
   currentStatus: 'online' | 'offline' | 'unknown' = 'offline'; // Literal Values in use
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit() {
     setInterval(() => {
       const rnd = Math.random(); // 0 - 0.999999999
 
@@ -21,6 +23,6 @@ export class ServerStatusComponent {
       } else {
         this.currentStatus = 'unknown';
       }
-    }, 5000);
+    }, 4000);
   }
 }
