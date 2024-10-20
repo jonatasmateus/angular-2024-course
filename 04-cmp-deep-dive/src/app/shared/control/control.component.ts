@@ -16,7 +16,7 @@ import {
   styleUrl: './control.component.css',
   encapsulation: ViewEncapsulation.None,
   host: {
-    // These are the recommeded way (HostBinding & HostListener) which Angular team give to us.
+    // These are the recommended way (HostBinding & HostListener) which Angular team give to us.
     class: 'control',
     '(click)': 'onClick()',
   },
