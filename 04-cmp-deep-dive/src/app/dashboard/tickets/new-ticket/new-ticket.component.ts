@@ -1,4 +1,4 @@
-import { Component, ElementRef, output, viewChild } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ButtonComponent } from '../../../shared/button/button.component';
@@ -12,11 +12,14 @@ import { ControlComponent } from '../../../shared/control/control.component';
   styleUrl: './new-ticket.component.css',
 })
 export class NewTicketComponent {
-  private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
+  enteredTitle = '';
+  enteredText = '';
   add = output<{title: string; text: string}>();
 
-  onSubmit(title: string, text: string) {
-    this.add.emit({ title: title, text: text });
-    this.form().nativeElement.reset(); // nativeElement property is the way to have the same behavior as HTMLElement.
+  onSubmit() {
+    this.add.emit({ title: this.enteredTitle, text: this.enteredText });
+    // reset field values.
+    this.enteredTitle = '';
+    this.enteredText = '';
   }
 }
