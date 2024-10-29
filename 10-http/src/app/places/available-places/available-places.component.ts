@@ -18,10 +18,13 @@ export class AvailablePlacesComponent implements OnInit {
 
   ngOnInit() {
     this.httpClient
-      .get<{ places: Place[] }>('http://localhost:3000/places')
+      .get<{ places: Place[] }>('http://localhost:3000/places', {
+        observe: 'response'
+      }) // when we add this property, we change the response as *data* to a response as *object*, which can have body, headers, etc.
       .subscribe({
-        next: (resData) => {
-          console.log(resData.places);
+        next: (response) => {
+          console.log(response);
+          console.log(response.body?.places);
         },
       });
   }
