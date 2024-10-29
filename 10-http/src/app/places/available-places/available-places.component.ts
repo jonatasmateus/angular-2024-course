@@ -15,9 +15,11 @@ import { PlacesContainerComponent } from '../places-container/places-container.c
 })
 export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
+  isFetching = signal(false);
   private httpClient = inject(HttpClient);
 
   ngOnInit() {
+    this.isFetching.set(true);
     this.httpClient
       .get<{ places: Place[] }>('http://localhost:3000/places')
       .pipe(
@@ -27,6 +29,9 @@ export class AvailablePlacesComponent implements OnInit {
         next: (places) => {
           this.places.set(places);
         },
+        complete: () => {
+          this.isFetching.set(false);
+        }
       });
   }
 }
