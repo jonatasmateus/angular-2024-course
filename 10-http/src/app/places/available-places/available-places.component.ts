@@ -16,7 +16,7 @@ export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
   isFetching = signal(false);
   error = signal('');
-  
+
   private placesService = inject(PlacesService);
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class AvailablePlacesComponent implements OnInit {
   }
 
   onSelectPlace(selectedPlace: Place) {
-    this.placesService.addPlaceToUserPlaces(selectedPlace.id).subscribe({
+    this.placesService.addPlaceToUserPlaces(selectedPlace).subscribe({
       next: (resData) => console.log(resData),
     });
   }
