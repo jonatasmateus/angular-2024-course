@@ -31,4 +31,8 @@ export class UserPlacesComponent {
       },
     });
   }
+
+  onRemovePlace(place: Place) {
+    this.placesService.removeUserPlace(place).subscribe();
+  }
 }
