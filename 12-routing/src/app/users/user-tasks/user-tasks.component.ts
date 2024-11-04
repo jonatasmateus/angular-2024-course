@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 
 import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-tasks',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css',
 })
