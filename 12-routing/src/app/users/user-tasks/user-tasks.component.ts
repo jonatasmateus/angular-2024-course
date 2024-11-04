@@ -1,4 +1,6 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { UsersService } from '../users.service';
 
 @Component({
@@ -7,11 +9,17 @@ import { UsersService } from '../users.service';
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css',
 })
-export class UserTasksComponent {
-  userId = input.required<string>();
+export class UserTasksComponent implements OnInit {
+  userName = '';
   private usersService = inject(UsersService);
+  private activetdRoute = inject(ActivatedRoute);
 
-  userName = computed(
-    () => this.usersService.users.find((u) => u.id === this.userId())?.name
-  );
+  ngOnInit(): void {
+    // alt. way of getting userName and userId through out subscription.
+    this.activetdRoute.paramMap.subscribe({
+      next: (paramMap) => {
+        this.userName = this.usersService.users.find((u) => u.id === paramMap.get('userId'))?.name || '';
+      },
+    });
+  }
 }
