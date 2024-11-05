@@ -24,7 +24,7 @@ export class UserTasksComponent {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe({
-      next: data => console.log(data)
+      next: (data) => console.log(data),
     });
   }
 }
@@ -41,4 +41,11 @@ export const resolveUserName: ResolveFn<string> = (
       (u) => u.id === activatedRoute.paramMap.get('userId')
     )?.name || '';
   return userName;
+};
+
+export const resolveTitle: ResolveFn<string> = (
+  activatedRoute: ActivatedRouteSnapshot,
+  routerState: RouterStateSnapshot
+) => {
+  return resolveUserName(activatedRoute, routerState) + '\'s Tasks'; // Max's Tasks
 };
