@@ -13,7 +13,10 @@ export const routes: Routes = [
   {
     path: 'users/:userId', // <your-domain>/users/<uid>
     component: UserTasksComponent,
-    children: userRoutes
+    children: userRoutes,
+    data: {
+      message: 'Hello!', // with this, it's possible set this property in components as an input binding, through withComponentInputBinding() called in app.config.ts
+    }
   },
   {
     path: '**', // 'catch all routes'; this route is activated if no other route is met.
