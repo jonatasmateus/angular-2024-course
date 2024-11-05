@@ -41,8 +41,10 @@
   </p>
 </section>
 
-@defer(on interaction) {
+<!-- `prefetch` option allows the Angular pull the necessary code, in this case, on hover before the user click on paragraph. -->
+@defer(on interaction; prefetch on hover) { 
   <app-offer-preview />
 } @placeholder {
   <p class="fallback">We might have an offer...</p>
 }
+  
