@@ -8,7 +8,7 @@ import { inject } from '@angular/core';
 
 const dummyCanMacth: CanMatchFn = (route, segments) => {
   const router = inject(Router);
-  return Math.random() < 0.5 ? true : new RedirectCommand(router.parseUrl('/unauthorized'));
+  return Math.random() < 1 ? true : new RedirectCommand(router.parseUrl('/unauthorized'));
 };
 
 export const routes: Routes = [
